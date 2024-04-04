@@ -3,6 +3,7 @@ import React from 'react'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import OpeningPage from './src/screens/OpeningPage'
+import SecondOpeningPage from './src/screens/SecondOpeningPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,10 @@ const App = () => {
       <Stack.Screen
         name="OpeningPage"
         component={OpeningPage}
+      />
+      <Stack.Screen
+      name="SecondOpeningPage"
+      component={SecondOpeningPage}
       />
     </Stack.Navigator>
   </NavigationContainer>

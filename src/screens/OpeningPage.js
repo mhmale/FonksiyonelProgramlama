@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, Image, Pressable, StatusBar } from 'react-native'
 import React from 'react'
+import SecondOpeningPage from './SecondOpeningPage'
 
-const OpeningPage = () => {
+const OpeningPage = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
@@ -12,7 +13,7 @@ const OpeningPage = () => {
       <Text style={styles.Text}>Çevreye Faydalı Olmaya Hazır Mısın? </Text>
       </View>
         <View style={styles.NextView}>
-      <Pressable>
+      <Pressable onPress={() => navigation.navigate(SecondOpeningPage)}>
         <Text style={styles.NextText}> (っ◔◡◔)っ </Text>
       </Pressable>
         </View>
