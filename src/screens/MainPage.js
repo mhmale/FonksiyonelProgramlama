@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { RNCamera } from 'react-native-camera';
+
 
 const MainPage = () => {
   return (
@@ -8,6 +10,11 @@ const MainPage = () => {
       <View style={styles.greenArea}>
         <Text style={styles.greenText}>info Alanı</Text>
       </View>
+      <RNCamera
+        style={styles.camera}
+        type={RNCamera.Constants.Type.back}
+        captureAudio={false}
+      />
     </View>
   );
 };
@@ -38,6 +45,13 @@ const styles = StyleSheet.create({
     color: '#ffffff', 
     fontSize: 16,
     textAlign: 'center',
+  },
+  camera: {
+    position: 'absolute', 
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });
 
