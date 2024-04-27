@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import MainPage from './MainPage';
 
-const SecondOpeningPage = () => {
+const SecondOpeningPage = ({navigation}) => {
   return (
     
     <View style={styles.container}>
@@ -22,7 +23,7 @@ const SecondOpeningPage = () => {
         </View>
       </View>
       <View style={styles.NextView}>
-      <Pressable onPress={() => navigation.navigate(SecondOpeningPage)}>
+      <Pressable onPress={() => navigation.navigate(MainPage)}>
         <Text style={styles.NextText}> (っ◔◡◔)っ </Text>
       </Pressable>
         </View>
@@ -51,13 +52,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   NextView:{
     position: "absolute",
     bottom: 50,
     right: 20, 
-  }
+  },
+  NextText:{
+    fontWeight:"bold",
+    fontSize:15,
+    color:"black",
+  },
 });
 
 export default SecondOpeningPage;
