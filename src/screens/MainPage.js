@@ -1,19 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { RNCamera } from 'react-native-camera';
-
+import { Camera } from 'expo-camera';
 
 const MainPage = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Kamera Alanı</Text>
       <View style={styles.greenArea}>
-        <Text style={styles.greenText}>info Alanı</Text>
+        <Text style={styles.greenText}>apğomfmjağoskfasğofkasğofkasğofkasğofkğ</Text>
       </View>
-      <RNCamera
+      <Camera
         style={styles.camera}
-        type={RNCamera.Constants.Type.back}
-        captureAudio={false}
+        type={Camera.Constants.Type.back}
       />
     </View>
   );
