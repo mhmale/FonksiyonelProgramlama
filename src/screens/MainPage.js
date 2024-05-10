@@ -11,7 +11,7 @@ const MainPage = () => {
 
   const handleBarCodeScanned = (data) => {
     console.log('Barkod tarandı:', data);
-    // Burada barkod veya QR kodu analizi yapılabilir
+    // Kamera Analizi için gerekli kodlar
     if (data.type === 'malzeme1') {
       setMaterialType({ type: 'malzeme1', recyclable: true });
     } else if (data.type === 'malzeme2') {
