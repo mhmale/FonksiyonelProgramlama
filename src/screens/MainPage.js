@@ -1,53 +1,44 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Camera } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 
 const MainPage = () => {
-  const [materialType, setMaterialType] = useState(null);
 
-  const handleCameraReady = () => {
-    console.log('Kamera hazır.');
-  };
+  const [facing, setFacing] = useState('back');
+  const [permission, requestPermission] = useCameraPermissions();
 
-  const handleBarCodeScanned = (data) => {
-    console.log('Barkod tarandı:', data);
-    // Kamera Analizi için gerekli kodlar
-    if (data.type === 'malzeme1') {
-      setMaterialType({ type: 'malzeme1', recyclable: true });
-    } else if (data.type === 'malzeme2') {
-      setMaterialType({ type: 'malzeme2', recyclable: false });
-    } else {
-      setMaterialType(null);
-    }
-  };
+  if (!permission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
 
-  const renderMaterialInfo = () => {
-    if (materialType) {
-      return (
-        <View style={styles.greenArea}>
-          <Text style={styles.greenText}>Malzeme Türü: {materialType.type}</Text>
-          <Text style={styles.greenText}>{materialType.recyclable ? 'Geri Dönüştürülebilir' : 'Geri Dönüştürülemez :('}</Text>
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.greenArea}>
-          <Text style={styles.greenText}>info screen</Text>
-        </View>
-      );
-    }
-  };
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+
+  function toggleCameraFacing() {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Kamera Alanı</Text>
-      {renderMaterialInfo()}
-      <Camera
-        style={styles.camera}
-        type={Camera.Constants.Type.back}
-        onCameraReady={handleCameraReady}
-        onBarCodeScanned={handleBarCodeScanned}
-      />
+      <CameraView style={styles.camera} facing={facing}>
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
+        </View>
+      </CameraView>
+      <View style={styles.greenArea}>
+        <Text style={styles.greenText}>sadasda</Text>
+      </View>
     </View>
   );
 };
@@ -55,25 +46,28 @@ const MainPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2b2b2b',
+    backgroundColor: '#2b2b2b', 
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
+    position: 'relative', 
   },
   text: {
-    color: '#ffffff',
+    color: "#ffffff", 
     fontSize: 18,
     textAlign: 'center',
-    marginBottom: 20,
+    marginTop: 20,
+    left: 20,
   },
   greenArea: {
     backgroundColor: '#4caf50',
-    padding: 20,
+    padding: 50,
     borderRadius: 8,
-    marginTop: 20,
+    position: 'absolute', 
+    bottom: 20, 
+    zIndex: 1, 
   },
   greenText: {
-    color: '#ffffff',
+    color: '#ffffff', 
     fontSize: 16,
     textAlign: 'center',
   },
@@ -84,6 +78,19 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    margin: 64,
+  },
+  button: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+
 });
+
 
 export default MainPage;
